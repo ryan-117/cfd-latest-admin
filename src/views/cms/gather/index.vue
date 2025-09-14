@@ -71,7 +71,7 @@ const params = reactive({
   author: '',
   description: '',
   img: '',
-  content: '欢迎使用ChanCMS系统',
+  content: '欢迎使用',
   status: '0',
   pv: 1,
   link: ''

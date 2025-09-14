@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 export const setTitle = (title) => {
-  window.document.title = `${title}-chancms管理系统` || "chancms管理系统";
+  window.document.title = `${title}-管理系统` || "CFD管理系统";
 };
 
 export const setCookie = (tokenName = "token", token) => {

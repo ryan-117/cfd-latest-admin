@@ -3,9 +3,6 @@
       <el-button icon="Avatar" circle />
       <template #dropdown>
         <el-dropdown-menu>
-          <a href="https://www.chancms.top" target="_blank">
-            <el-dropdown-item>官网首页</el-dropdown-item>
-          </a>
           <el-dropdown-item v-if="setting.persionCenter">个人中心</el-dropdown-item>
           <el-dropdown-item divided @click="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
@@ -15,7 +12,7 @@
 <script setup name="LogOut">
 import { userStore } from '@/stores/user'
 const user = userStore()
-const username = user?.userInfo?.username || 'ChanCMS'
+const username = user?.userInfo?.username || 'CFD'
 
 import settingStore from '@/stores/setting'
 const setting = settingStore()

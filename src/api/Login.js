@@ -34,20 +34,6 @@ export default class Login extends Base {
       url: `${API.BASE_API}/base/user/detail`,
       method: "get",
     });
-    // return new Promise((resovle, reject) => {
-    //   setTimeout(() => {
-    //     let res = {
-    //       code: 200,
-    //       data: {
-    //         userId: "123456",
-    //         userName: "mingkong",
-    //         nickName: "明空",
-    //         role: "admin",
-    //       },
-    //     };
-    //     resovle(res);
-    //   }, 300);
-    // });
   }
 
   static menuList() {

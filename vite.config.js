@@ -77,27 +77,27 @@ export default defineConfig({
     strictPort: true,
     proxy: {
       "/api": {
-        target: "http://localhost:3000/api", // api接口代理,
+        target: "http://localhost:5600/api", // api接口代理,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
       "/base": {
-        target: "http://localhost:3000/base", // api接口代理,
+        target: "http://localhost:5600/base", // api接口代理,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/base/, ""),
       },
       "/cms": {
-        target: "http://localhost:3000/cms", // api接口代理,
+        target: "http://localhost:5600/cms", // api接口代理,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/cms/, ""),
       },
       "/vip": {
-        target: "http://localhost:3000/vip", // api接口代理,
+        target: "http://localhost:5600/vip", // api接口代理,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/vip/, ""),
       },
       "/public": {
-        target: "http://localhost:3000/public", // 上传图片代理,
+        target: "http://localhost:5600/public", // 上传图片代理,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/public/, ""),
       },

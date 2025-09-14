@@ -6,7 +6,7 @@
         <div class="bg-fff pd-20 radius-6 flex justify-around flex-wrap mb-10">
           <p class="mb-12 f-16 c-000 w-full">
             <span class="mr-20">用户：<strong class="f-18 fw-600">{{ username }}</strong> </span>
-            <span class="mr-10">{{ city }}：{{ ip }}</span>
+            <!-- <span class="mr-10">{{ city }}：{{ ip }}</span> -->
           </p>
           <router-link to="/article">
             <div class="flex flex-col align-c">
@@ -59,71 +59,6 @@
 
           </div>
         </div>
-
-        <el-row :gutter="10">
-          <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-            <div class="bg-fff pt-20 radius-6 w-full h-230">
-              <ChanEcharts :option="option" />
-            </div>
-          </el-col>
-          <el-col :xs="24" :sm="12" :md="12" :lg="12" :xl="12">
-            <div class="bg-fff pd-20 radius-6 mb-10">
-              <div class="mb-12 f-16 c-000 fw-500">系统特色</div>
-              <p class="f-15 c-4e5969 mb-16">
-                ChanCMS基于Node、Express、MySQL、Vue3研发的高质量实用型CMS系统。轻量、灵活、易用、安全。
-              </p>
-              <p class="f-13 mb-7 c-4e5969">
-                <strong class="mr-10">自研</strong>自研chanjs轻量级mvc框架实现，长久可持续。
-              </p>
-              <p class="f-13 mb-7 c-4e5969">
-                <strong class="mr-10">模块</strong>支持模块化、插件化、扩展模型、前后端分离架构。
-              </p>
-              <p class="f-13 mb-7 c-4e5969">
-                <strong class="mr-10">API</strong> 支持wap、微信小程序、app等多端提供接口支持。
-              </p>
-              <p class="f-13 mb-7 c-4e5969">
-                <strong class="mr-10">SEO</strong>专注于seo，灵活设置路由、关键词和描述。
-              </p>
-              <p class="f-13 mb-7 c-4e5969">
-                <strong class="mr-10">安全</strong>基于knex防注入，接口权限校验，为安全提供保障。
-              </p>
-              <p class="f-13 mb-7 c-4e5969">
-                <strong class="mr-10">灵活</strong>碎片功能，是全局变量，灵活配置使用。
-              </p>
-            </div>
-          </el-col>
-        </el-row>
-      </el-col>
-
-      <el-col :xs="24" :sm="6" :md="6" :lg="6" :xl="6">
-        <div class="bg-fff pd-20 radius-6 mb-10">
-          <div class="mb-12 f-16 c-000 bold">基本信息</div>
-          <p class="f-13 mb-6"><span>官网地址：</span>
-            <a href="//www.chancms.top" target="blank">www.chancms.top</a>
-          </p>
-          <p class="f-13 mb-6"><span>程序版本：</span>ChanCMS v{{ data.APP_VERSION }} {{ data.APP_VERSION_TIME }}</p>
-          <p class="f-13 mb-6 c-4e5969">
-            <span class="c-333">服务架构：</span>nodejs express mysql
-          </p>
-          <p class="f-13 mb-6"><span>前端架构：</span>vite vue3 element-plus</p>
-          <p class="f-13 mb-6"><span>技术开发：</span>明空</p>
-          <p class="f-13 mb-6 row"><span>联系微信：</span>yanyutao2014</p>
-          <p class="f-13 mb-6 row"><span>联系邮箱：</span>867528315@qq.com</p>
-
-          <p class="f-13 mb-6"><span>程序路径：</span>{{ dirname }}</p>
-        </div>
-
-        <div class="bg-fff pd-20 radius-6 mb-10">
-          <div class="mb-12 f-16 c-1d2129 bold">技术服务</div>
-          <p class="f-13 mb-6 c-4e5969 flex-wrap flex justify-around">
-            <span class="c-1d2129 col-12 mb-10">企业建站</span>
-            <span class="c-1d2129 col-12 mb-10">模板开发</span>
-            <span class="c-1d2129 col-12 mb-10">模板仿站</span>
-            <span class="c-1d2129 col-12 mb-10">模板定制</span>
-            <span class="c-1d2129 col-12">小程序开发</span>
-            <span class="c-1d2129 col-12">前端开发</span>
-          </p>
-        </div>
       </el-col>
     </el-row>
   </div>
@@ -146,11 +81,11 @@ const data = reactive({
   message: 0,
   tag: 0,
   article: 0,
-  appName: 'ChanCMS',
-  APP_VERSION: '',
-  APP_VERSION_TIME: '',
-  APP_AUTHOR_EMAIL: '',
-  APP_AUTHOR_WECHAT: '',
+  version: '',
+  appName: 'CFD',
+  port: '',
+  versionTime: '',
+  author: '',
 });
 
 useTransition(data.article, {
@@ -161,7 +96,7 @@ const dirname = ref('');
 const loading = ref(true);
 const option = ref({
   title: {
-    text: 'ChanCMS架构',
+    text: '架构',
     left: '20',
     textStyle: {
       fontSize: 16,

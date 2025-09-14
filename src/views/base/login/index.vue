@@ -1,20 +1,11 @@
 <template>
   <div class="flex">
     <div class="login-bg pd-20 flex flex-col">
-      <h1 class="title align-c fw-400 c-fff f-24 mb-20">ChanCMS v3.1.2</h1>
-      <div class="w-full flex sends flex-col justify-center c-fff">
-        <div class="love pd-20">
-          <p class="f-16 mb-15">ChanCMS基于Node、Express、MySQL、Vue3研发的高质量实用型CMS系统。轻量、灵活、易用、安全。</p>
-          <p class="f-16 mb-15">官网：<a href="https://www.chancms.top">www.chancms.top</a></p>
-          <p class="f-16 mb-15">作者：明空</p>
-        </div>
-      </div>
     </div>
 
     <div class="login-wrap flex justify-center items-center flex-col flex-1">
       <div class="login flex flex-col justify-center items-center w-full">
-        <IconLogo class="icon"></IconLogo>
-        <h1>ChanCMS</h1>
+        <h1>CFD</h1>
         <el-form class="mt-20 login-form" :model="form" ref="formRef" label-width="70px" @keyup.enter="login">
           <el-form-item label="用户名" prop="username" label-position="left" :rules="[
           {
@@ -43,14 +34,6 @@
           </el-form-item>
         </el-form>
       </div>
-
-      <footer class="w-full overflow-h">
-        <p class="f-13 text-c mt-10">
-          Copyright &copy; 2016-2025
-          <a href="https://www.chancms.top" class="mr-5" target="_blank" title="chanyue">ChanCMS</a>
-          ● 位于南京 服务全国
-        </p>
-      </footer>
     </div>
   </div>
   <Vcode :imgs="imgs" :show="isShow" @success="onSuccess" @fail="onFail" />
@@ -61,7 +44,6 @@ import { ref, reactive, onMounted } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import Vcode from 'vue3-puzzle-vcode'
 import { userStore } from '@/stores/user'
-import IconLogo from '@/components/icons/IconLogo.vue'
 import { create, getIp, del } from '@/api/login_log.js'
 import { setCookie,getCookie } from '@/utils/tool'
 import Login from '@/api/Login'

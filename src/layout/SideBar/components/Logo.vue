@@ -2,7 +2,7 @@
   <h1 class="logo overflow-h flex justify-center pt-10 pb-10 mb-10">
     <logo class="icon mr-5" />
     <el-badge class="f-12" value="V" type="primary">
-      <span v-show="!isCollapse" class="f-22 nowrap fw-700"> ChanCMS </span>
+      <span v-show="!isCollapse" class="f-22 nowrap fw-700"> CFD </span>
     </el-badge>
   </h1>
 </template>

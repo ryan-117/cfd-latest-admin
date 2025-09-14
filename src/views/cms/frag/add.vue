@@ -69,7 +69,7 @@ const params = reactive({
   type: 1,
   name: '',
   mark: '',
-  content: '欢迎使用ChanCMS系统'
+  content: '欢迎使用'
 })
 
 const paramsRules = reactive({
