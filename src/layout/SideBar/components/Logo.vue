@@ -1,15 +1,11 @@
 <template>
   <h1 class="logo overflow-h flex justify-center pt-10 pb-10 mb-10">
-    <logo class="icon mr-5" />
-    <el-badge class="f-12" value="V" type="primary">
-      <span v-show="!isCollapse" class="f-22 nowrap fw-700"> CFD </span>
-    </el-badge>
+    <img src="@/assets/logo.png" class="icon mr-5" />
   </h1>
 </template>
 
 <script setup name="Logo">
 import { defineProps } from 'vue'
-import logo from '@/assets/icons/logo.svg?component';
 const props = defineProps({
   isCollapse: {
     type: Boolean,

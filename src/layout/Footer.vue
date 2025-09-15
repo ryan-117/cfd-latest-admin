@@ -3,7 +3,7 @@
     <p class="text-c c-333 f-12">
       Copyright © 2016-2025
       <a class="c-9ca4bf" href="https://www.cfd.com" target="_blank">
-        长风道
+        changfengdao
       </a>
       All Rights Reserved.
     </p>
