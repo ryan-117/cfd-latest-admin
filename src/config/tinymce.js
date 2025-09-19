@@ -7,8 +7,8 @@ export let tinymceSet = {
   custom_images_upload: true,
   // 复用 图片上传 api 地址
   images_upload_url: '/base/upload/img',
-  // 图片上传大小限制,默认200kb
-  custom_images_limit_size: 1024 * 200,
+  // 图片上传大小限制,默认2048kb
+  custom_images_limit_size: 1024 * 2048,
   branding: false, //是否禁用“Powered by TinyMCE”
   menubar: true, //顶部菜单栏显示
   // image_dimensions: false, //去除宽高属性
