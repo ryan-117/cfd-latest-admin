@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 搜索区域 -->
-    <div class="bg-fff radius-6 pd-20 mb-10">
+    <!-- <div class="bg-fff radius-6 pd-20 mb-10">
       <el-form :inline="true" :model="params" label-width="68px" ref="formRef">
         <el-form-item label="标题" prop="keywords">
           <el-input
@@ -18,7 +18,7 @@
           <el-button @click="clearSearch('formRef')" round>清空</el-button>
         </el-form-item>
       </el-form>
-    </div>
+    </div> -->
 
     <div class="radius-6 bg-fff pd-20">
       <el-table
@@ -29,40 +29,41 @@
         @selection-change="handleSelectionChange"
         v-loading="loading"
       >
-        <el-table-column prop="id" label="编号" width="80" fixed></el-table-column>
-        <el-table-column prop="name" label="姓名"></el-table-column>
-        <el-table-column prop="tel" label="电话" width="140"></el-table-column>
-        <el-table-column prop="email" label="邮箱"></el-table-column>
-        <el-table-column prop="company" label="公司"></el-table-column>
-        <el-table-column prop="province" label="所在省份"></el-table-column>
-        <el-table-column prop="industry" label="行业"></el-table-column>
-        <el-table-column prop="scene" label="试用场景"></el-table-column>
-        <el-table-column label="试用产品">
+        <el-table-column prop="id" label="编号" width="70"></el-table-column>
+        <el-table-column prop="name" label="姓名" width="120" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="tel" label="电话" width="120" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="email" label="邮箱" width="180" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="scene" label="试用场景" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column label="试用产品" width="200">
           <template #default="scope">
-            {{ formatProducts(scope.row.trial_products) }}
+            <el-tag v-for="(item, index) in formatProducts(scope.row.trial_products)" :key="index">{{ item }}</el-tag>
           </template>
         </el-table-column>
+        <el-table-column prop="company" label="公司" width="150" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="province" label="所在省份" width="100" show-overflow-tooltip></el-table-column>
+        <el-table-column prop="industry" label="行业" width="80" show-overflow-tooltip></el-table-column>
         <el-table-column prop="createdAt" label="创建时间" width="180"></el-table-column>
-
-        <el-table-column fixed="right" label="操作" width="140">
+        <el-table-column fixed="right" label="操作" width="70">
           <template #default="scope">
-            <el-button :icon="View" circle @click="openDetail(scope.row)"></el-button>
+            <el-button link @click="openDetail(scope.row)">查看详情</el-button>
           </template>
         </el-table-column>
       </el-table>
 
       <!-- 分页 -->
-      <el-row type="flex" class="mt-20" justify="space-between">
+      <div class="mt-20 flex justify-end">
         <el-pagination
           background
-          layout="prev, pager, next"
+          layout="total, sizes, prev, pager, next, jumper"
           @current-change="handleCurrentChange"
-          :page-size="pageSize"
+          @size-change="handleSizeChange"
+          :page-sizes="[10, 20, 50, 100]"
           :total="count"
           v-model:currentPage="cur"
-          hide-on-single-page
+          :page-size="pageSize"
+          size="small"
         ></el-pagination>
-      </el-row>
+      </div>
     </div>
 
     <!-- 详情弹窗 -->
@@ -76,9 +77,8 @@
         <el-descriptions-item label="所在省份">{{ detail.province }}</el-descriptions-item>
         <el-descriptions-item label="行业">{{ detail.industry }}</el-descriptions-item>
         <el-descriptions-item label="试用场景">{{ detail.scene }}</el-descriptions-item>
-        <el-descriptions-item label="试用产品">{{ formatProducts(detail.trial_products) }}</el-descriptions-item>
+        <el-descriptions-item label="试用产品">{{ formatProducts(detail.trial_products).join('、') }}</el-descriptions-item>
         <el-descriptions-item label="创建时间">{{ detail.createdAt }}</el-descriptions-item>
-        <el-descriptions-item label="更新时间">{{ detail.updatedAt }}</el-descriptions-item>
       </el-descriptions>
       <template #footer>
         <el-button @click="closeDetail">关闭</el-button>
@@ -90,7 +90,6 @@
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { Delete, Edit, View, Search } from '@element-plus/icons-vue'
 import { search, detail as getDetail} from '@/api/trial.js'
 
 const router = useRouter()
@@ -121,10 +120,10 @@ const productMap = {
 }
 
 const formatProducts = (val) => {
-  if (!val && val !== 0) return ''
+  if (!val && val !== 0) return []
   // 后端可能返回字符串 "CFD,RASE" 或数组，兼容处理
   const arr = Array.isArray(val) ? val : String(val).split(',').filter(Boolean)
-  return arr.map((v) => productMap[v] || v).join('、')
+  return arr.map((v) => productMap[v] || v)
 }
 
 // 清空搜索
@@ -148,11 +147,11 @@ const doSearch = () => {
 const searchTrial = async () => {
   try {
     loading.value = true
-    const res = await search(cur.value)
+    const res = await search(cur.value, pageSize.value)
     if (res && res.code === 200) {
       tableData.value = Array.isArray(res.data.list) ? res.data.list : []
       count.value = Number(res.data.count) || 0
-      cur.value = Number(res.data.current) || p.page
+      cur.value = Number(res.data.current) || cur.value
     }
   } catch (err) {
     console.error(err)
@@ -164,7 +163,14 @@ const searchTrial = async () => {
 // 翻页
 const handleCurrentChange = (e) => {
   cur.value = e
-  doSearch()
+  searchTrial()
+}
+
+// 每页数量变化
+const handleSizeChange = (size) => {
+  pageSize.value = size
+  cur.value = 1
+  searchTrial()
 }
 
 // 处理选中变化
@@ -193,16 +199,10 @@ const closeDetail = () => {
   }
 }
 
-// 路由 query 变化同步 page
-watch(
-  () => route.query,
-  (newQuery) => {
-    const qcur = Number(newQuery.cur) || 1
-    cur.value = qcur
-    searchTrial()
-  },
-  { immediate: true }
-)
+// 初始化时直接查一次
+onMounted(() => {
+  searchTrial()
+})
 
 onMounted(() => {
   // 初始查询由 watch 触发

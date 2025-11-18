@@ -23,7 +23,7 @@
 
 
   /* base color */
-  --blue: #324157;
+  --blue: #409eff;
   --light-blue: #3A71A8;
   --red: #C03639;
   --pink: #E65D6E;
@@ -181,15 +181,6 @@ body {
   position: relative;
   overflow: hidden;
   transition: 0.2s;
-}
-
-
-.el-button--primary {
-  background: center center #4A54FF;
-  background-image: linear-gradient(315deg, #6772FF 0, #00F9E5 100%);
-  background-size: 104% 104%;
-  color: #fff;
-  border: none;
 }
 
 .avatar-uploader {
